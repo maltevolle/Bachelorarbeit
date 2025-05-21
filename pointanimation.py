@@ -9,7 +9,7 @@ prim = stage.GetPrimAtPath(prim_path)
 
 def load_waypoints():
     convpoints = []
-    with open("C:/Users/volle/Documents/output.txt", "r") as f:
+    with open("C:/Users/volle/Downloads/output.txt", "r") as f:
         for line in f:
             if line.strip():
                 x, y, z = map(float, line.strip().split())
@@ -46,6 +46,7 @@ else:
                 if current_segment[0] >= len(waypoints) - 1:
                     print("[INFO] Animation complete.")
                     has_finished[0] = True
+  
                     return
 
                 start = waypoints[current_segment[0]]

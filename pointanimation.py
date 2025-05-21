@@ -27,28 +27,32 @@ else:
         print("[WARN] No translateOp found.")
     else:
         waypoints = load_waypoints()
-        if not waypoints:
-            print("[ERROR] No waypoints loaded.")
+        if not waypoints or len(waypoints) < 2:
+            print("[ERROR] Need at least 2 waypoints.")
         else:
             update_stream = omni.kit.app.get_app().get_update_event_stream()
 
-            current_segment = [0]  # List for mutable reference
+            current_segment = [0]
             segment_start_time = [time.time()]
-            segment_duration = 2.0  # Sekunden pro Wegpunkt-Übergang
+            segment_duration = 2.0  # seconds between waypoints
+            has_finished = [False]  # mutable flag so we can change it in closure
 
             def on_update(event):
-                now = time.time()
-                idx = current_segment[0]
+                if has_finished[0]:
+                    return  # Already finished
 
-                if idx >= len(waypoints) - 1:
+                now = time.time()
+
+                if current_segment[0] >= len(waypoints) - 1:
                     print("[INFO] Animation complete.")
-                    update_stream.unsubscribe(on_update_sub)
+                    has_finished[0] = True
                     return
 
-                start = waypoints[idx]
-                end = waypoints[idx + 1]
+                start = waypoints[current_segment[0]]
+                end = waypoints[current_segment[0] + 1]
                 t = (now - segment_start_time[0]) / segment_duration
                 t = min(t, 1.0)
+
                 new_pos = start * (1 - t) + end * t
                 translate_op.Set(new_pos)
 

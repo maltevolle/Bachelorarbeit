@@ -127,6 +127,11 @@ class PathPlanningTask(BaseTask):
                     self._target_visual_material.set_color(np.array([1, 0, 0]))
         else:
             self._target.set_local_pose(position=target_position, orientation=target_orientation)
+        state = self._target.get_default_state()
+        
+        print(state.orientation)
+        print(state.orientation)
+        print(state.orientation)
         return
 
     def get_params(self) -> dict:

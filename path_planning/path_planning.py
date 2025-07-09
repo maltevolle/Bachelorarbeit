@@ -42,7 +42,12 @@ class PathPlanning(BaseSample):
         my_franka.disable_gravity()
         self._controller = FrankaRrtController(name="franka_rrt_controller", robot_articulation=my_franka)
         self._articulation_controller = my_franka.get_articulation_controller()
-        return
+
+        # Neu: Direkt nach Controller-Erstellung resetten und Hindernisse hinzufügen
+        self._controller.reset()
+        for wall in self._franka_task.get_obstacles():
+            self._controller.add_obstacle(wall)
+
 
     async def _on_follow_target_event_async(self):
         world = self.get_world()

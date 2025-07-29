@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="tomato_soup_can2">
+  <link name="Root">
+    <visual>
+      <origin xyz="0.3 -0.35 0.42" rpy="4.71238898 0. 0."/>
+      <geometry>
+        <mesh filename="meshes/Root__05_tomato_soup_can__05_tomato_soup_can.obj" scale="3. 3. 3."/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.3 0.35 0.42" rpy="4.71238898 0. 0."/>
+      <geometry>
+        <mesh filename="meshes/Root__05_tomato_soup_can__05_tomato_soup_can.obj" scale="3. 3. 3."/>
+      </geometry>
+    </collision>
+  </link>
+</robot>

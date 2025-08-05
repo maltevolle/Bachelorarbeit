@@ -1,6 +1,6 @@
 from isaacsim.robot_motion.motion_generation.path_planning_interface import PathPlanner
 
-class RRTStar(LulaInterfaceHelper, PathPlanner):
+class Planner(LulaInterfaceHelper, PathPlanner):
     def __init__(self, robot_description_path, urdf_path, rrt_config_path, end_effector_frame_name, cost_function=None):
         self.robot_description_path = robot_description_path
         self.urdf_path = urdf_path

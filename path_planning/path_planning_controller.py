@@ -191,7 +191,7 @@ class FrankaRrtController(PathPlannerController):
             "path_planning_example_assets",
             "franka_conservative_spheres_robot_description.yaml",
         )
-        rrt = RRTStar(**rrt_config)
+        rrt = Planner(**rrt_config)
         #rrt = RRT(**rrt_config)
         # Create a trajectory generator to convert RRT cspace waypoints to trajectories
         cspace_trajectory_generator = LulaCSpaceTrajectoryGenerator(
@@ -210,3 +210,4 @@ class FrankaRrtController(PathPlannerController):
         PathPlannerController.__init__(self, name, visualizer, cspace_trajectory_generator)
 
     
+
